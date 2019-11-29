@@ -17,7 +17,7 @@ public final class AccountServiceImpl implements AccountService {
     private AccountServiceImpl() {
     }
 
-    public synchronized static AccountServiceImpl getInstance() {
+    public static synchronized AccountServiceImpl getInstance() {
         if (INSTANCE == null) {
             INSTANCE = new AccountServiceImpl();
         }
@@ -25,7 +25,7 @@ public final class AccountServiceImpl implements AccountService {
     }
 
     // For tests ------------
-    public static final List<Account> ACCOUNT_LIST = new ArrayList<>();
+    protected static final List<Account> ACCOUNT_LIST = new ArrayList<>();
 
     static {
         ACCOUNT_LIST.add(new Account(UUID.fromString("21317427-8884-4a05-8ed1-156164b39e7d"), "fooFirstName", "fooLastName"));
@@ -36,8 +36,7 @@ public final class AccountServiceImpl implements AccountService {
     @Override
     public Account retrieve(UUID accountID) {
         Optional<Account> optionalAccount = ACCOUNT_LIST.stream().filter(account -> accountID.equals(account.getId())).findFirst();
-        optionalAccount.orElseThrow(() -> new AccountException("Account doesn't exist !"));
-        return optionalAccount.get();
+        return optionalAccount.orElseThrow(() -> new AccountException("Account doesn't exist !"));
     }
 
     @Override
