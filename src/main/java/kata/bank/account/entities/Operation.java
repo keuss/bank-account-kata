@@ -7,13 +7,13 @@ public class Operation {
 
     private UUID id;
     private UUID accountId;
-    private int amount;
+    private double amount;
     private OperationType operationType;
     private LocalDateTime date;
     // new account balance after operation
-    private int newBalance;
+    private double newBalance;
 
-    public Operation(int amount, OperationType operationType) {
+    public Operation(double amount, OperationType operationType) {
         this.id = UUID.randomUUID();
         this.amount = amount;
         this.operationType = operationType;
@@ -21,7 +21,16 @@ public class Operation {
         this.date = LocalDateTime.now();
     }
 
-    public int getAmount() {
+    public Operation(UUID id, UUID accountId, double amount, OperationType operationType) {
+        this.id = id;
+        this.accountId = accountId;
+        this.amount = amount;
+        this.operationType = operationType;
+        // New JAVA 8 API java.time....
+        this.date = LocalDateTime.now();
+    }
+
+    public double getAmount() {
         return amount;
     }
 
@@ -33,7 +42,7 @@ public class Operation {
         return date;
     }
 
-    public int getNewBalance() {
+    public double getNewBalance() {
         return newBalance;
     }
 
@@ -41,7 +50,7 @@ public class Operation {
         return id;
     }
 
-    public void setNewBalance(int newBalance) {
+    public void setNewBalance(double newBalance) {
         this.newBalance = newBalance;
     }
 

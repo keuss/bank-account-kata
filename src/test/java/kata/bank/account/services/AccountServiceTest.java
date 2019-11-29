@@ -30,11 +30,11 @@ public class AccountServiceTest {
 
     @Test
     void testAddOperations() {
-        int newBalance1 = accountService.addOperation(accountId, new Operation(100, OperationType.DEPOSIT));
+        double newBalance1 = accountService.addOperation(accountId, new Operation(100, OperationType.DEPOSIT));
         assertEquals(100, newBalance1);
-        int newBalance2 = accountService.addOperation(accountId, new Operation(-100, OperationType.WITHDRAWAL));
+        double newBalance2 = accountService.addOperation(accountId, new Operation(-100, OperationType.WITHDRAWAL));
         assertEquals(0, newBalance2);
-        int newBalance3 = accountService.addOperation(accountId, new Operation(50, OperationType.DEPOSIT));
+        double newBalance3 = accountService.addOperation(accountId, new Operation(50, OperationType.DEPOSIT));
         assertEquals(50, newBalance3);
         final List<Operation> operations = accountService.showHistory(accountId);
         operations.stream().forEach(System.out::println);

@@ -40,11 +40,12 @@ public final class AccountServiceImpl implements AccountService {
     }
 
     @Override
-    public int addOperation(UUID accountID, Operation operation) {
-        final int newBalance = this.retrieve(accountID).addOperation(operation);
-        // update current operation for account statement
-        operation.setNewBalance(newBalance);
-        operation.setAccountId(accountID);
+    public double addOperation(UUID accountID, Operation operation) {
+        Operation newOp = new Operation(operation.getId(), accountID, operation.getAmount(), operation.getOperationType());
+        final double newBalance = this.retrieve(accountID).addOperation(newOp);
+        // update new operation operation for account statement
+        newOp.setNewBalance(newBalance);
+        newOp.setAccountId(accountID);
         return newBalance;
     }
 

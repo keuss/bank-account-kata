@@ -23,7 +23,7 @@ public interface AccountService {
      * @param operation the operation to add
      * @return
      */
-    int addOperation(UUID accountID, Operation operation);
+    double addOperation(UUID accountID, Operation operation);
 
     /**
      * showHistory

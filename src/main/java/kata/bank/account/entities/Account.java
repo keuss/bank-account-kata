@@ -1,16 +1,17 @@
 package kata.bank.account.entities;
 
+import com.google.common.util.concurrent.AtomicDouble;
+
 import java.util.List;
 import java.util.UUID;
 import java.util.concurrent.CopyOnWriteArrayList;
-import java.util.concurrent.atomic.AtomicInteger;
 
 public class Account {
 
     private UUID id;
     private String firstName;
     private String lastName;
-    private AtomicInteger balance = new AtomicInteger(0);
+    private AtomicDouble balance = new AtomicDouble(0);
     // java.util.concurrent
     List<Operation> operations = new CopyOnWriteArrayList<>();
 
@@ -32,7 +33,7 @@ public class Account {
      * @param operation the operation
      * @return the updated current balance
      */
-    public int addOperation(Operation operation) {
+    public double addOperation(Operation operation) {
         this.operations.add(operation);
         // update balance
         return balance.addAndGet(operation.getAmount());
@@ -50,7 +51,7 @@ public class Account {
         return lastName;
     }
 
-    public AtomicInteger getBalance() {
+    public AtomicDouble getBalance() {
         return balance;
     }
 
